@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Asm.Models.Product>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+    <div class="container">
+        <header class="nn-header">
+            <div class="col-lg-1 nn-text-align-center">
+                <img src="~/Content/img/logo.PNG" style="width:75px" />
+            </div><!--end logo-->
+            <div class="col-md-6 col-sm-6 ">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control" placeholder="search" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+            </div><!--end search box-->
+            <div class="col-lg-4">
+                <div class="nn-top-cart-wrapper ">
+                    <div class="nn-top-cart-contain">
+                        <div class="nn-block-cart">
+                            <div class="nn-top-cart-title">
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                @Html.ActionLink("Cart", "Index", "Cart")
+                                0 item<i class="caret"></i></span>
+                                <br /><span class="price"><strong>$0.00</strong></span></span>
+                                </a>
+                            </div>
+                            <div class="nn-top-cart-content" style="overflow: hidden; display: none;">
+                                <p class="empty">You have no items in your shopping cart.</p>
+                                <div class="top-subtotal">Subtotal: <span class="price">$0.00</span></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div><!--end cart box-->
+
+        </header>
+        @Html.Partial("Menu")
+        <div class="container row">
+
+            <div class="col-lg-12 col-xs-12">
+                @Html.Action("Category", "Home")
+
+                <div class="nn-block-margin-top30px">
+                    <div>
+                   @foreach (var p in Model)
+                      {
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="nn-product-box">
+
+                                    <img class="img-responsive" src="Contents/img/products/@p.Image" />
+                                <div class="nn-product-box-descriptions">
+                                    <h3 class="nn-product-box-name">
+                                        @Html.ActionLink(p.Name,"Detail","Product")
+                                    </h3>
+                                    <div class="nn-product-box-price ">
+                                        <span class="">@p.UnitPrice</span>
+                                    </div>
+                                    <div class="nn-product-box-actions">
+                                        <button type="button" class="btn btn-default">
+                                            <span class="nn-color-white">Add to Cart</span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("Footer")
+    </div>
